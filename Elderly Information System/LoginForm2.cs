@@ -135,7 +135,6 @@ namespace Elderly_Information_System
                 {
                     MainForm mf = new MainForm();
                     this.Hide();
-                    MessageBox.Show("Successfully Login");
                     mf.Show();
                 }
 
@@ -233,7 +232,6 @@ namespace Elderly_Information_System
                     {
                         MainForm mf = new MainForm();
                         this.Hide();
-                        MessageBox.Show("Successfully Login");
                         mf.Show();
                     }
 

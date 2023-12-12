@@ -401,7 +401,7 @@ namespace Elderly_Information_System
         private void TbxContactNum_KeyPress(object sender, KeyPressEventArgs e)
         {
             char num = e.KeyChar;
-            if (!char.IsDigit(num) && num != 8 )
+            if (!char.IsDigit(num) && num != 8 && num != 46)
             {
                 e.Handled = true;
             }
@@ -410,7 +410,7 @@ namespace Elderly_Information_System
         private void TbxPurok_KeyPress(object sender, KeyPressEventArgs e)
         {
             char num = e.KeyChar;
-            if (!char.IsDigit(num) && num != 8)
+            if (!char.IsDigit(num) && num != 8 && num != 46)
             {
                 e.Handled = true;
             }

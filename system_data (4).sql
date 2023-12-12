@@ -24,6 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `username` varchar(50) NOT NULL,
+  `pass` varbinary(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`username`, `pass`) VALUES
+('admin', 0x3863363937366535623534313034313562646539303862643464656531356466623136376139633837336663346262386138);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userinfo`
 --
 
@@ -47,6 +65,12 @@ CREATE TABLE `userinfo` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `userinfo`
