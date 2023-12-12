@@ -397,5 +397,23 @@ namespace Elderly_Information_System
         {
 
         }
+
+        private void TbxContactNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char num = e.KeyChar;
+            if (!char.IsDigit(num) && num != 8 )
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TbxPurok_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char num = e.KeyChar;
+            if (!char.IsDigit(num) && num != 8)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

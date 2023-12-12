@@ -90,6 +90,7 @@
             this.TbxContactNum.Name = "TbxContactNum";
             this.TbxContactNum.Size = new System.Drawing.Size(177, 30);
             this.TbxContactNum.TabIndex = 10;
+            this.TbxContactNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbxContactNum_KeyPress);
             // 
             // TbxAge
             // 
@@ -217,6 +218,7 @@
             this.TbxPurok.Name = "TbxPurok";
             this.TbxPurok.Size = new System.Drawing.Size(177, 30);
             this.TbxPurok.TabIndex = 21;
+            this.TbxPurok.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbxPurok_KeyPress);
             // 
             // label11
             // 
