@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -91,32 +92,7 @@ namespace Elderly_Information_System
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM login WHERE username = '" + TbxUsername.Text + "' AND pass = '" + TbxPass.Text + "'";
-            MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
-            MySqlCommand command = new MySqlCommand(query, connect);
-            command.CommandTimeout = 60;
-
-            try
-            {
-                connect.Open();
-
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                           
-                        }
-                    }
-                }
-
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show("Query error: " + x.Message);
-            }
+           
         }
 
         private void TbxPass_MouseLeave(object sender, EventArgs e)
@@ -153,70 +129,10 @@ namespace Elderly_Information_System
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string query = "SELECT * FROM login";
-                MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
-                MySqlCommand command = new MySqlCommand(query, connect);
-                command.Parameters.AddWithValue("@username", TbxUsername.Text);
-                command.Parameters.AddWithValue("@password", TbxPass.Text);
-                command.CommandTimeout = 60;
+              
 
-                try
-                {
-                    connect.Open();
-
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                if (TbxPass.Text == reader.GetString(0) && TbxUsername.Text == reader.GetString(1))
-                                {
-
-                                    MainForm mf = new MainForm();
-                                    this.Hide();
-                                    mf.Show();
-
-                                }
-                                if (TbxPass.Text == "Password" && TbxUsername.Text == "Username")
-                                {
-                                    MessageBox.Show("Please Input  Username and Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                else if (TbxPass.Text == "Password")
-                                {
-                                    MessageBox.Show("Please Input Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                else if (TbxUsername.Text == "Username")
-                                {
-                                    MessageBox.Show("Please Input Username", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                else if (TbxPass.Text != "admin" && TbxUsername.Text != reader.GetString(0))
-                                {
-                                    MessageBox.Show("Account did not Exists", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                                    UsernameMethod(TbxUsername);
-                                    PassMethod(TbxPass, CbxShowPass);
-                                }
-                                else if (TbxPass.Text != reader.GetString(1))
-                                {
-                                    MessageBox.Show("Account did not Exists", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                                    PassMethod(TbxPass, CbxShowPass);
-                                }
-                                else if (TbxUsername.Text != reader.GetString(0))
-                                {
-                                    MessageBox.Show("Account did not Exists", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                                    UsernameMethod(TbxUsername);
-                                }
-
-                            }
-                        }
-                    }
-
-                }
-                catch (Exception x)
-                {
-                    MessageBox.Show("Query error: " + x.Message);
-                }
             }
         }
+
     }
 }
