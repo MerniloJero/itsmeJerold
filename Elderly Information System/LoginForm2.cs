@@ -100,44 +100,17 @@ namespace Elderly_Information_System
             {
                 connect.Open();
 
-                if (query != "SELECT * FROM login WHERE username = 'admin' AND pass = 'admin'")
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    if (TbxPass.Text == "Password" && TbxUsername.Text == "Username")
+                    if (reader.HasRows)
                     {
-                        MessageBox.Show("Please Input  Username and Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else if (TbxPass.Text == "Password")
-                    {
-                        MessageBox.Show("Please Input Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else if (TbxUsername.Text == "Username")
-                    {
-                        MessageBox.Show("Please Input Username", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else if (TbxPass.Text != "admin" && TbxUsername.Text != "admin")
-                    {
-                        MessageBox.Show("Wrong Username and Password", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                        UsernameMethod(TbxUsername);
-                        PassMethod(TbxPass, CbxShowPass);
-                    }
-                    else if (TbxPass.Text != "admin")
-                    {
-                        MessageBox.Show("Wrong Password", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                        PassMethod(TbxPass, CbxShowPass);
-                    }
-                    else if (TbxUsername.Text != "admin")
-                    {
-                        MessageBox.Show("Wrong Username", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                        UsernameMethod(TbxUsername);
-                    }
-                }
-                else
-                {
-                    MainForm mf = new MainForm();
-                    this.Hide();
-                    mf.Show();
-                }
+                        while (reader.Read())
+                        {
 
+                           
+                        }
+                    }
+                }
 
             }
             catch (Exception x)
@@ -180,61 +153,63 @@ namespace Elderly_Information_System
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string query = "SELECT * FROM login WHERE username = '" + TbxUsername.Text + "' AND pass = '" + TbxPass.Text + "'";
+                string query = "SELECT * FROM login";
                 MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
                 MySqlCommand command = new MySqlCommand(query, connect);
+                command.Parameters.AddWithValue("@username", TbxUsername.Text);
+                command.Parameters.AddWithValue("@password", TbxPass.Text);
                 command.CommandTimeout = 60;
 
                 try
                 {
                     connect.Open();
 
-                    if (query != "SELECT * FROM login WHERE username = 'admin' AND pass = 'admin'")
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        if (TbxPass.Text == "Password" && TbxUsername.Text == "Username")
+                        if (reader.HasRows)
                         {
-                            MessageBox.Show("Please Input  Username and Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (TbxPass.Text == "Password" && TbxUsername.Text == "")
-                        {
-                            MessageBox.Show("Please Input  Username and Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (TbxPass.Text == "" && TbxUsername.Text == "Username")
-                        {
-                            MessageBox.Show("Please Input  Username and Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (TbxPass.Text == "Password")
-                        {
-                            MessageBox.Show("Please Input Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (TbxUsername.Text == "Username")
-                        {
-                            MessageBox.Show("Please Input Username", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (TbxPass.Text != "admin" && TbxUsername.Text != "admin")
-                        {
-                            MessageBox.Show("Wrong Username and Password", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                            UsernameMethod(TbxUsername);
-                            PassMethod(TbxPass, CbxShowPass);
-                        }
-                        else if (TbxPass.Text != "admin")
-                        {
-                            MessageBox.Show("Wrong Password", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                            PassMethod(TbxPass, CbxShowPass);
-                        }
-                        else if (TbxUsername.Text != "admin")
-                        {
-                            MessageBox.Show("Wrong Username", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                            UsernameMethod(TbxUsername);
-                        }
-                    }
-                    else
-                    {
-                        MainForm mf = new MainForm();
-                        this.Hide();
-                        mf.Show();
-                    }
+                            while (reader.Read())
+                            {
+                                if (TbxPass.Text == reader.GetString(0) && TbxUsername.Text == reader.GetString(1))
+                                {
 
+                                    MainForm mf = new MainForm();
+                                    this.Hide();
+                                    mf.Show();
+
+                                }
+                                if (TbxPass.Text == "Password" && TbxUsername.Text == "Username")
+                                {
+                                    MessageBox.Show("Please Input  Username and Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                else if (TbxPass.Text == "Password")
+                                {
+                                    MessageBox.Show("Please Input Password", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                else if (TbxUsername.Text == "Username")
+                                {
+                                    MessageBox.Show("Please Input Username", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                else if (TbxPass.Text != "admin" && TbxUsername.Text != reader.GetString(0))
+                                {
+                                    MessageBox.Show("Account did not Exists", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                                    UsernameMethod(TbxUsername);
+                                    PassMethod(TbxPass, CbxShowPass);
+                                }
+                                else if (TbxPass.Text != reader.GetString(1))
+                                {
+                                    MessageBox.Show("Account did not Exists", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                                    PassMethod(TbxPass, CbxShowPass);
+                                }
+                                else if (TbxUsername.Text != reader.GetString(0))
+                                {
+                                    MessageBox.Show("Account did not Exists", "Invalid", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                                    UsernameMethod(TbxUsername);
+                                }
+
+                            }
+                        }
+                    }
 
                 }
                 catch (Exception x)

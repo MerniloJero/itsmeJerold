@@ -30,7 +30,7 @@ namespace Elderly_Information_System
                 DGVAllList.Columns[a].Name = columnNames[a];
             }
 
-            string query = "SELECT * FROM userinfo";
+            string query = "SELECT * FROM userinfo WHERE status = '1'";
             MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
             MySqlCommand command = new MySqlCommand(query, connect);
             command.CommandTimeout = 60;
@@ -45,7 +45,15 @@ namespace Elderly_Information_System
                 {
                     while (reader.Read())
                     {
-                        DGVAllList.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10), reader.GetString(11), reader.GetString(12));
+                        // Assuming the birthdate is stored in the 7th column (index 6)
+                        DateTime birthdate = reader.GetDateTime(6);
+
+                        // Extract year, month, and day
+                        int year = birthdate.Year;
+                        int month = birthdate.Month;
+                        int day = birthdate.Day;
+
+                        DGVAllList.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), month + "/" + day + "/" + year , reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10), reader.GetString(11), reader.GetString(12));
                     }
                 }
 

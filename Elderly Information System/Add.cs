@@ -24,71 +24,97 @@ namespace Elderly_Information_System
         DateTime currentDate = DateTime.Now;
 
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        public void testingP()
         {
+            int desiredLength = 11; // Set your desired length
 
-            DateTime birthdate = DtpBirthDate.Value;
-            int yearnow = currentDate.Year;
-            int monthnow = currentDate.Month;
-            int daynow = currentDate.Day;
-
-
-            int year = birthdate.Year;
-            int day = birthdate.Day;
-            int month = birthdate.Month;
-            string pension;
-
-            if(Convert.ToInt32(TbxAge.Text) >= 60 )
+            // Check if the length of the text in the TextBox is not equal to the desired length
+            if (TbxContactNum.Text.Length != desiredLength)
             {
-                pension = CbxPension.Text;
+                number = true;
             }
             else
             {
-                pension = "Not Yet";
+                number = false;
             }
+        }
 
 
-            string query = "INSERT INTO userinfo(residentId,household,lastname,firstname,middlename,suffix,birthdate,age,sex,civilStatus,pension,contactNumber,purok,dateregister) VALUES ( " +LblId.Text+"," + TbxHouseholdNo.Text + ",'" + TbxLName.Text + "','" + TbxFName.Text + "','" + TbxMName.Text + "','" + 
-            CbxSuffix.Text + "','"+ year + "-" + month + "-"+ day + "','" + TbxAge.Text + "','" + CbxGender.Text + "','" + CbxCivilStatus.Text +"','" +pension +"','"+TbxContactNum.Text + "','" + TbxPurok.Text +  "','" + yearnow + "-" + monthnow + "-" + daynow+ "');";
-            MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
-            MySqlCommand command = new MySqlCommand(query, connect);
-            command.CommandTimeout = 60;
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            testingP();
 
-            try
+            if (number == true)
             {
-                connect.Open();
+                number = false;
+                MessageBox.Show("Phone Numbers to Short", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                MySqlDataReader reader = command.ExecuteReader();
+            }
+            else
+            {
+                DateTime birthdate = DtpBirthDate.Value;
+                int yearnow = currentDate.Year;
+                int monthnow = currentDate.Month;
+                int daynow = currentDate.Day;
 
-                if (reader.HasRows)
+
+                int year = birthdate.Year;
+                int day = birthdate.Day;
+                int month = birthdate.Month;
+                string pension;
+
+                if (Convert.ToInt32(TbxAge.Text) >= 60)
                 {
+                    pension = CbxPension.Text;
                 }
                 else
                 {
-
-                    MessageBox.Show("Successfully Save");
-
-                    TbxHouseholdNo.Clear();
-                    TbxFName.Clear();
-                    TbxMName.Clear();
-                    TbxLName.Clear();
-                    CbxSuffix.ResetText();
-                    DtpBirthDate.ResetText();
-                    TbxAge.Clear();
-                    CbxGender.ResetText();
-                    CbxCivilStatus.ResetText();
-                    TbxContactNum.Clear();
-                    TbxPurok.Clear();
-                    CbxPension.ResetText();
-                    id++;
-                    LblId.Text = id.ToString();
-
-
+                    pension = "Not Yet";
                 }
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show("Query error: " + x.Message);
+
+
+                string query = "INSERT INTO userinfo(residentId,household,lastname,firstname,middlename,suffix,birthdate,age,sex,civilStatus,pension,contactNumber,purok,dateregister,status) VALUES ( " + LblId.Text + "," + TbxHouseholdNo.Text + ",'" + TbxLName.Text + "','" + TbxFName.Text + "','" + TbxMName.Text + "','" +
+                CbxSuffix.Text + "','" + year + "-" + month + "-" + day + "','" + TbxAge.Text + "','" + CbxGender.Text + "','" + CbxCivilStatus.Text + "','" + pension + "','" + TbxContactNum.Text + "','" + TbxPurok.Text + "','" + yearnow + "-" + monthnow + "-" + daynow + "', '1');";
+                MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
+                MySqlCommand command = new MySqlCommand(query, connect);
+                command.CommandTimeout = 60;
+
+                try
+                {
+                    connect.Open();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Successfully Save");
+
+                        TbxHouseholdNo.Clear();
+                        TbxFName.Clear();
+                        TbxMName.Clear();
+                        TbxLName.Clear();
+                        CbxSuffix.ResetText();
+                        DtpBirthDate.ResetText();
+                        TbxAge.Clear();
+                        CbxGender.ResetText();
+                        CbxCivilStatus.ResetText();
+                        TbxContactNum.Clear();
+                        TbxPurok.Clear();
+                        CbxPension.ResetText();
+                        id++;
+                        LblId.Text = id.ToString();
+
+
+                    }
+                }
+                catch (Exception x)
+                {
+                    MessageBox.Show("Query error: " + x.Message);
+                }
             }
 
         }
@@ -98,12 +124,14 @@ namespace Elderly_Information_System
             LblPension.Visible = false;
             CbxPension.Visible = false;
             BtnDelete.Visible = false;
+            BtnDeath.Visible = false;
 
 
             if (Connection.check == true)
             {
                 Connection.check = false;
                 BtnDelete.Visible = true;
+                BtnDeath.Visible = true;
 
                BtnSave.Text = "UPDATE";
                
@@ -349,7 +377,7 @@ namespace Elderly_Information_System
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            string query = "DELETE FROM userinfo WHERE residentId = '" + Connection.IdContent + "'";
+            string query = "UPDATE userinfo SET status = '2' WHERE residentId = '" + Connection.IdContent + "'";
             MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
             MySqlCommand command = new MySqlCommand(query, connect);
             command.CommandTimeout = 60;
@@ -398,7 +426,20 @@ namespace Elderly_Information_System
 
         }
 
+        bool number = false;
+
         private void TbxContactNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char num = e.KeyChar;
+            if (!char.IsDigit(num) && num != 8 && num != 46)
+            {
+                e.Handled = true;
+            }
+
+           
+        }
+
+        private void TbxPurok_KeyPress(object sender, KeyPressEventArgs e)
         {
             char num = e.KeyChar;
             if (!char.IsDigit(num) && num != 8 && num != 46)
@@ -407,7 +448,53 @@ namespace Elderly_Information_System
             }
         }
 
-        private void TbxPurok_KeyPress(object sender, KeyPressEventArgs e)
+        private void BtnDeath_Click(object sender, EventArgs e)
+        {
+            string query = "UPDATE userinfo SET status = '0' WHERE residentId = '" + Connection.IdContent + "'";
+            MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
+            MySqlCommand command = new MySqlCommand(query, connect);
+            command.CommandTimeout = 60;
+
+            try
+            {
+                connect.Open();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                }
+                else
+                {
+                    MessageBox.Show("Informarion have been Deleted");
+
+                    TbxHouseholdNo.Clear();
+                    TbxFName.Clear();
+                    TbxMName.Clear();
+                    TbxLName.Clear();
+                    CbxSuffix.ResetText();
+                    DtpBirthDate.ResetText();
+                    TbxAge.Clear();
+                    CbxGender.ResetText();
+                    CbxCivilStatus.ResetText();
+                    TbxContactNum.Clear();
+                    TbxPurok.Clear();
+                    CbxPension.ResetText();
+
+                    MainForm mf = new MainForm();
+                    mf.Hide();
+                    Connection.checkaLL = true;
+                    mf.Show();
+                }
+
+            }
+            catch (Exception b)
+            {
+                MessageBox.Show("Query error: " + b.Message);
+            }
+        }
+
+        private void TbxHouseholdNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             char num = e.KeyChar;
             if (!char.IsDigit(num) && num != 8 && num != 46)

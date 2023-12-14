@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnDeath = new System.Windows.Forms.Button();
             this.BtnNotification = new System.Windows.Forms.Button();
             this.BtnElderList = new System.Windows.Forms.Button();
             this.BtnLogout = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.BtnDeath);
             this.panel1.Controls.Add(this.BtnNotification);
             this.panel1.Controls.Add(this.BtnElderList);
             this.panel1.Controls.Add(this.BtnLogout);
@@ -55,6 +57,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(229, 563);
             this.panel1.TabIndex = 0;
+            // 
+            // BtnDeath
+            // 
+            this.BtnDeath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnDeath.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnDeath.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnDeath.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnDeath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDeath.Location = new System.Drawing.Point(4, 4);
+            this.BtnDeath.Name = "BtnDeath";
+            this.BtnDeath.Size = new System.Drawing.Size(37, 23);
+            this.BtnDeath.TabIndex = 8;
+            this.BtnDeath.UseVisualStyleBackColor = false;
+            this.BtnDeath.Click += new System.EventHandler(this.BtnDeath_Click);
             // 
             // BtnNotification
             // 
@@ -217,5 +233,6 @@
         public System.Windows.Forms.Panel PLoad;
         private System.Windows.Forms.Button BtnElderList;
         public System.Windows.Forms.Button BtnNotification;
+        private System.Windows.Forms.Button BtnDeath;
     }
 }

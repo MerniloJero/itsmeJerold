@@ -178,7 +178,7 @@ namespace Elderly_Information_System
            {
                 age += 1;
 
-                string query = $"UPDATE userinfo SET age = {age} WHERE residentId = {id} ";
+                string query = $"UPDATE userinfo SET age = {age} WHERE residentId = {id} AND status = '1' ";
                 MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
                 MySqlCommand command = new MySqlCommand(query, connect);
                 command.CommandTimeout = 60;
@@ -258,6 +258,19 @@ namespace Elderly_Information_System
             PLoad.Controls.Clear();
 
             Notification el = new Notification();
+            PLoad.Controls.Add(el);
+            el.Show();
+
+            LblElder.Visible = true;
+            LblInfo.Visible = true;
+        }
+
+        private void BtnDeath_Click(object sender, EventArgs e)
+        {
+            PLoad.BackgroundImage = null;
+            PLoad.Controls.Clear();
+
+            Death el = new Death();
             PLoad.Controls.Add(el);
             el.Show();
 

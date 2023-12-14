@@ -57,6 +57,7 @@
             this.LblPension = new System.Windows.Forms.Label();
             this.CbxPension = new System.Windows.Forms.ComboBox();
             this.BtnDelete = new System.Windows.Forms.Button();
+            this.BtnDeath = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TbxFName
@@ -333,6 +334,7 @@
             this.TbxHouseholdNo.Name = "TbxHouseholdNo";
             this.TbxHouseholdNo.Size = new System.Drawing.Size(177, 30);
             this.TbxHouseholdNo.TabIndex = 30;
+            this.TbxHouseholdNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbxHouseholdNo_KeyPress);
             // 
             // LblPension
             // 
@@ -372,12 +374,26 @@
             this.BtnDelete.UseVisualStyleBackColor = false;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // BtnDeath
+            // 
+            this.BtnDeath.BackColor = System.Drawing.Color.White;
+            this.BtnDeath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDeath.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDeath.Location = new System.Drawing.Point(521, 515);
+            this.BtnDeath.Name = "BtnDeath";
+            this.BtnDeath.Size = new System.Drawing.Size(92, 33);
+            this.BtnDeath.TabIndex = 36;
+            this.BtnDeath.Text = "DEATH";
+            this.BtnDeath.UseVisualStyleBackColor = false;
+            this.BtnDeath.Click += new System.EventHandler(this.BtnDeath_Click);
+            // 
             // Add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BackgroundImage = global::Elderly_Information_System.Properties.Resources.back21;
+            this.Controls.Add(this.BtnDeath);
             this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.CbxPension);
             this.Controls.Add(this.LblPension);
@@ -445,5 +461,6 @@
         private System.Windows.Forms.Label LblPension;
         private System.Windows.Forms.ComboBox CbxPension;
         private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.Button BtnDeath;
     }
 }

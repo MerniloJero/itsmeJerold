@@ -56,6 +56,12 @@
       <DependentUpon>AllList.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="Death.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Death.Designer.cs">
+      <DependentUpon>Death.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </Compile>
     <EmbeddedResource Include="AllList.resx">
       <DependentUpon>AllList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Death.resx">
+      <DependentUpon>Death.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
