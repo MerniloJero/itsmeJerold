@@ -18,3 +18,4 @@ C:\School Projects\IT Department\Second Year(2023-2024)\IT\Database Final System
 C:\School Projects\IT Department\Second Year(2023-2024)\IT\Database Final System\Elderly Information System\obj\Debug\Elderly_Information_System.Elderlist.resources
 C:\School Projects\IT Department\Second Year(2023-2024)\IT\Database Final System\Elderly Information System\obj\Debug\Elderly_Information_System.Notification.resources
 C:\School Projects\IT Department\Second Year(2023-2024)\IT\Database Final System\Elderly Information System\obj\Debug\Elderly_Information_System.Death.resources
+C:\School Projects\IT Department\Second Year(2023-2024)\IT\Database Final System\Elderly Information System\obj\Debug\Elderly_Information_System.ChangePass.resources

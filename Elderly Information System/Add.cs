@@ -26,7 +26,7 @@ namespace Elderly_Information_System
 
         public void testingP()
         {
-            int desiredLength = 11; // Set your desired length
+            int desiredLength = 11; 
 
             // Check if the length of the text in the TextBox is not equal to the desired length
             if (TbxContactNum.Text.Length != desiredLength)

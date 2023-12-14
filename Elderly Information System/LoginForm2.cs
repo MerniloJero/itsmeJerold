@@ -20,6 +20,8 @@ namespace Elderly_Information_System
             InitializeComponent();
         }
 
+        int num = 0;
+
         //Method
         private static void UsernameMethod(TextBox username)
         {
@@ -92,7 +94,82 @@ namespace Elderly_Information_System
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-           
+
+            if (TbxUsername.Text == "Username" || TbxPass.Text == "Password")
+            {
+                MessageBox.Show("Please enter your username and password to log in", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                num++;
+            }
+            else
+            {
+
+                string username = TbxUsername.Text;
+                string password = TbxPass.Text;
+
+                string hashedPassword = HashPassword(password);
+
+                string query = "SELECT * FROM login WHERE username = '" + username + "'";
+
+                MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
+                MySqlCommand command = new MySqlCommand(query, connect);
+                command.CommandTimeout = 60;
+
+                try
+                {
+                    connect.Open();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string pass = reader.GetString(1);
+
+                            if (pass == hashedPassword && username == reader.GetString(0))
+                            {
+                                MainForm mf = new MainForm();
+                                this.Hide();
+                                mf.Show();
+                            }
+                            else
+                            {
+                               MessageBox.Show("Account does not exist. Check the username and password and try again.","Warning", MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
+                                num++;
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Account does not exist. Check the username and password and try again.","Warning", MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
+                        num++;
+                    }
+
+                }
+                catch (Exception x)
+                {
+                    MessageBox.Show("Query error: " + x.Message);
+                }
+            }
+
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convert the byte array to a hexadecimal string
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in hashedBytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+
+                return builder.ToString();
+            }
         }
 
         private void TbxPass_MouseLeave(object sender, EventArgs e)
@@ -129,10 +206,74 @@ namespace Elderly_Information_System
         {
             if (e.KeyCode == Keys.Enter)
             {
-              
+                if (TbxUsername.Text == "Username" || TbxPass.Text == "Password")
+                {
+                    MessageBox.Show("Please enter your username and password to log in", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    num++;
+                }
+                else
+                {
+
+                    string username = TbxUsername.Text;
+                    string password = TbxPass.Text;
+
+                    string hashedPassword = HashPassword(password);
+
+                    string query = "SELECT * FROM login WHERE username = '" + username + "'";
+
+                    MySqlConnection connect = new MySqlConnection(Connection.ConnectionString);
+                    MySqlCommand command = new MySqlCommand(query, connect);
+                    command.CommandTimeout = 60;
+
+                    try
+                    {
+                        connect.Open();
+
+                        MySqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                string pass = reader.GetString(1);
+
+                                if (pass == hashedPassword && username == reader.GetString(0))
+                                {
+                                    MainForm mf = new MainForm();
+                                    this.Hide();
+                                    mf.Show();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Account does not exist. Check the username and password and try again.", "Warning", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                                    num++;
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Account does not exist. Check the username and password and try again.", "Warning", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                            num++;
+                        }
+
+                    }
+                    catch (Exception x)
+                    {
+                        MessageBox.Show("Query error: " + x.Message);
+                    }
+                }
+
+
 
             }
         }
 
+        private void LblChangePass_Click(object sender, EventArgs e)
+        {
+            ChangePass cs = new ChangePass();
+            this.Hide();
+            cs.Show();
+        }
     }
 }

@@ -32,6 +32,7 @@
             this.CbxShowPass = new System.Windows.Forms.CheckBox();
             this.TbxPass = new System.Windows.Forms.TextBox();
             this.TbxUsername = new System.Windows.Forms.TextBox();
+            this.LblChangePass = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -42,6 +43,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.LblChangePass);
             this.panel1.Controls.Add(this.CbxShowPass);
             this.panel1.Controls.Add(this.BtnLogin);
             this.panel1.Controls.Add(this.TbxPass);
@@ -93,6 +95,18 @@
             this.TbxUsername.Enter += new System.EventHandler(this.TbxUsername_Enter);
             this.TbxUsername.Leave += new System.EventHandler(this.TbxUsername_Leave);
             // 
+            // LblChangePass
+            // 
+            this.LblChangePass.AutoSize = true;
+            this.LblChangePass.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblChangePass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.LblChangePass.Location = new System.Drawing.Point(102, 373);
+            this.LblChangePass.Name = "LblChangePass";
+            this.LblChangePass.Size = new System.Drawing.Size(89, 15);
+            this.LblChangePass.TabIndex = 13;
+            this.LblChangePass.Text = "Change Password";
+            this.LblChangePass.Click += new System.EventHandler(this.LblChangePass_Click);
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -110,6 +124,7 @@
             this.BtnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.BtnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLogin.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnLogin.ForeColor = System.Drawing.Color.Black;
             this.BtnLogin.Image = global::Elderly_Information_System.Properties.Resources.login;
             this.BtnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -161,5 +176,6 @@
         private System.Windows.Forms.TextBox TbxUsername;
         private System.Windows.Forms.CheckBox CbxShowPass;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblChangePass;
     }
 }
