@@ -90,7 +90,6 @@ namespace Elderly_Information_System
                     }
                     else
                     {
-
                         MessageBox.Show("Successfully Save");
 
                         TbxHouseholdNo.Clear();

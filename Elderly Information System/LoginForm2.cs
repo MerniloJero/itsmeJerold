@@ -20,7 +20,6 @@ namespace Elderly_Information_System
             InitializeComponent();
         }
 
-        int num = 0;
 
         //Method
         private static void UsernameMethod(TextBox username)
@@ -98,7 +97,6 @@ namespace Elderly_Information_System
             if (TbxUsername.Text == "Username" || TbxPass.Text == "Password")
             {
                 MessageBox.Show("Please enter your username and password to log in", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                num++;
             }
             else
             {
@@ -135,7 +133,6 @@ namespace Elderly_Information_System
                             else
                             {
                                MessageBox.Show("Account does not exist. Check the username and password and try again.","Warning", MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
-                                num++;
 
                             }
                         }
@@ -143,7 +140,6 @@ namespace Elderly_Information_System
                     else
                     {
                         MessageBox.Show("Account does not exist. Check the username and password and try again.","Warning", MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
-                        num++;
                     }
 
                 }
@@ -209,7 +205,6 @@ namespace Elderly_Information_System
                 if (TbxUsername.Text == "Username" || TbxPass.Text == "Password")
                 {
                     MessageBox.Show("Please enter your username and password to log in", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    num++;
                 }
                 else
                 {
@@ -246,7 +241,6 @@ namespace Elderly_Information_System
                                 else
                                 {
                                     MessageBox.Show("Account does not exist. Check the username and password and try again.", "Warning", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                                    num++;
 
                                 }
                             }
@@ -254,7 +248,6 @@ namespace Elderly_Information_System
                         else
                         {
                             MessageBox.Show("Account does not exist. Check the username and password and try again.", "Warning", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                            num++;
                         }
 
                     }
